@@ -39,6 +39,6 @@
             android:layout_height="wrap_content"
             android:text="Ver más "
             tools:ignore="MissingConstraints" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
