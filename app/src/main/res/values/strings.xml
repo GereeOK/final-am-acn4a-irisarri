@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">geremias-irisarri-aplicacionesmoviles</string>
+    <string name="title_services">Nuestros Servicios</string>
+    <string name="btn_reserve">Reservar</string>
+    <string name="label_my_reservations">Mis Reservas</string>
 </resources>
+
