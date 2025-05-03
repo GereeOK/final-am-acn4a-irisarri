@@ -22,7 +22,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_tourism_logo"
+            android:src="@drawable/img_turista"
             android:contentDescription="@string/app_name"/>
 
         <TextView
