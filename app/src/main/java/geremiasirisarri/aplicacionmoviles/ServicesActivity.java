@@ -16,7 +16,7 @@ public class ServicesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_services);
 
         LinearLayout llServices        = findViewById(R.id.Services);
         LinearLayout misReservasLayout = findViewById(R.id.misReservasLayout);
