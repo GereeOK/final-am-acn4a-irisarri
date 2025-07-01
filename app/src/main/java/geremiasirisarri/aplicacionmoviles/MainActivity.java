@@ -13,15 +13,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Habilita edge-to-edge antes de inflar el layout:
         EdgeToEdge.enable(this);
+
+        // Carga el XML con tu toolbar y scrollView:
         setContentView(R.layout.activity_services);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.header), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        // Aplica los insets (status bar / navbar) al Toolbar que ahora tiene id @+id/toolbar
+        ViewCompat.setOnApplyWindowInsetsListener(
+                findViewById(R.id.toolbar),
+                (v, insets) -> {
+                    Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    v.setPadding(
+                            systemBars.left,
+                            systemBars.top,
+                            systemBars.right,
+                            systemBars.bottom
+                    );
+                    return insets;
+                }
+        );
     }
-    }
+}
+
 
 
 
