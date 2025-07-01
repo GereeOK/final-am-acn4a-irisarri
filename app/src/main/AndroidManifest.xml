@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="geremiasirisarri.aplicacionmoviles"
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
@@ -12,16 +13,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Geremiasirisarriaplicacionesmoviles"
         tools:targetApi="31">
+
+        <!-- Pantalla principal (launcher) -->
         <activity
             android:name=".MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <!-- Pantalla 'Nuestros Servicios' -->
+        <activity
+            android:name=".ServicesActivity"
+            android:exported="true" />
+
+        <!-- Pantalla 'Mis Reservas' -->
+        <activity
+            android:name=".ReservationActivity"
+            android:exported="true" />
+
+        <!-- Pantalla 'Contacto' -->
+        <activity
+            android:name=".ContactActivity"
+            android:exported="true" />
+
+    </application>
 </manifest>
 
