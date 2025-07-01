@@ -27,18 +27,22 @@
         <!-- Pantalla 'Nuestros Servicios' -->
         <activity
             android:name=".ServicesActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainMenuActivity" />
 
         <!-- Pantalla 'Mis Reservas' -->
         <activity
             android:name=".ReservationActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainMenuActivity" />
 
         <!-- Pantalla 'Contacto' -->
         <activity
             android:name=".ContactActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainMenuActivity" />
 
     </application>
 </manifest>
+
 

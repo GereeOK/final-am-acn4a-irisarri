@@ -2,6 +2,7 @@ package geremiasirisarri.aplicacionmoviles;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Arrays;
@@ -28,51 +30,57 @@ public class ServicesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
 
-        // Inicializamos SharedPreferences
+        //  ➤ Habilitar flecha “Up”
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        // 1) Inicializar SharedPreferences
         prefs = getSharedPreferences("baires_prefs", MODE_PRIVATE);
 
-        // Referencias a layouts
+        // 2) Referencias a layouts
         llServices        = findViewById(R.id.llServices);
         misReservasLayout = findViewById(R.id.misReservasLayout);
 
-        // Datos de servicios
+        // 3) Cargar reservas ya guardadas
+        loadExistingReservations();
+
+        // 4) Datos de servicios
         List<Service> servicios = Arrays.asList(
                 new Service("City Tour",      "Recorrido por lo mejor de Buenos Aires",      R.drawable.img_citytour),
                 new Service("Show de Tango",  "Cena y espectáculo en una clásica tanguería",  R.drawable.img_tango_show),
                 new Service("Delta del Tigre","Navegación por el río y paseo en lancha",     R.drawable.img_tigre)
         );
 
-        // Inflamos cada card y asignamos listener
+        // 5) Inflar cada card y asignar listener
         for (Service s : servicios) {
             View card = getLayoutInflater().inflate(R.layout.item_service, llServices, false);
 
-            ImageView iv      = card.findViewById(R.id.ivService);
-            TextView  tvName  = card.findViewById(R.id.tvName);
-            TextView  tvDesc  = card.findViewById(R.id.tvDesc);
-            Button    btnReserve = card.findViewById(R.id.btnReserve);
+            ImageView iv        = card.findViewById(R.id.ivService);
+            TextView  tvName    = card.findViewById(R.id.tvName);
+            TextView  tvDesc    = card.findViewById(R.id.tvDesc);
+            Button    btnReserve= card.findViewById(R.id.btnReserve);
 
             iv.setImageResource(s.getImageResId());
             tvName.setText(s.getName());
             tvDesc.setText(s.getDescription());
 
             btnReserve.setOnClickListener(v -> {
-                // 1) Toast de confirmación
+                // a) Toast de confirmación
                 Toast.makeText(this, "Reservaste: " + s.getName(), Toast.LENGTH_SHORT).show();
 
-                // 2) Mostrar sección Mis Reservas si estaba oculta
+                // b) Mostrar Mis Reservas si estaba oculto
                 if (misReservasLayout.getVisibility() == View.GONE) {
                     misReservasLayout.setVisibility(View.VISIBLE);
                 }
 
-                // 3) Persistir en SharedPreferences
+                // c) Persistir en SharedPreferences
                 Set<String> actuales = prefs.getStringSet("reservas", new HashSet<>());
                 Set<String> nuevas   = new HashSet<>(actuales);
                 nuevas.add(s.getName());
-                prefs.edit()
-                        .putStringSet("reservas", nuevas)
-                        .apply();
+                prefs.edit().putStringSet("reservas", nuevas).apply();
 
-                // 4) Añadir dinámicamente un TextView con la reserva
+                // d) Añadir reserva a la UI
                 TextView reserva = new TextView(this);
                 reserva.setText(s.getName());
                 reserva.setTextSize(16);
@@ -91,11 +99,12 @@ public class ServicesActivity extends AppCompatActivity {
 
             llServices.addView(card);
         }
-
-        // 5) (Opcional) Cargar al inicio las reservas ya guardadas
-        loadExistingReservations();
     }
 
+    /**
+     * Carga al inicio las reservas previamente guardadas
+     * y las despliega en la UI.
+     */
     private void loadExistingReservations() {
         Set<String> guardadas = prefs.getStringSet("reservas", null);
         if (guardadas != null && !guardadas.isEmpty()) {
@@ -119,6 +128,17 @@ public class ServicesActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Cierra esta Activity y vuelve a MainMenuActivity
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /** Convierte dp a píxeles para márgenes */
     private int dpToPx(int dp) {
         return Math.round(dp * getResources().getDisplayMetrics().density);
     }
