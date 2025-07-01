@@ -1,7 +1,17 @@
 <resources>
-    <string name="app_name">geremias-irisarri-aplicacionesmoviles</string>
+    <!-- Nombre de la app -->
+    <string name="app_name">Baires Essence</string>
+
+    <!-- Pantalla Servicios -->
     <string name="title_services">Nuestros Servicios</string>
     <string name="btn_reserve">Reservar</string>
     <string name="label_my_reservations">Mis Reservas</string>
+
+    <!-- ⬇️ Menú Principal -->
+    <string name="btn_services">Servicios</string>
+    <string name="btn_reservations">Mis Reservas</string>
+    <string name="btn_contact">Contacto</string>
 </resources>
+
+
 

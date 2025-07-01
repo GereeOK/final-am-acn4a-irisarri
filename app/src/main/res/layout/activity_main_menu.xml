@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_medium">
+
+    <!-- 1️⃣ LOGO: ImageView anclado a la esquina superior izquierda -->
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/img_turista"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- 2️⃣ TÍTULO: TextView alineado al lado del logo -->
+    <TextView
+        android:id="@+id/tvAppTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/imgLogo"
+        app:layout_constraintStart_toEndOf="@id/imgLogo"
+        android:layout_marginStart="@dimen/padding_small"/>
+
+    <!-- 3️⃣ MENÚ: LinearLayout vertical centrado para los botones -->
+    <LinearLayout
+        android:id="@+id/llMenuOptions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="64dp"
+        app:layout_constraintTop_toBottomOf="@id/imgLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Botón Servicios -->
+        <Button
+            android:id="@+id/btnServicios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_services"
+            android:layout_marginBottom="@dimen/padding_small"/>
+
+        <!-- Botón Mis Reservas -->
+        <Button
+            android:id="@+id/btnReservations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_reservations"
+            android:layout_marginBottom="@dimen/padding_small"/>
+
+        <!-- Botón Contacto -->
+        <Button
+            android:id="@+id/btnContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_contact"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
