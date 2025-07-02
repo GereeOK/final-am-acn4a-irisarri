@@ -26,6 +26,9 @@
     <string name="btn_send">Enviar</string>
     <string name="toast_sent">¡Gracias %1$s! Tu consulta ha sido enviada.</string>
 
+    <!-- Mensaje cuando no hay reservas -->
+    <string name="no_reservations">Todavía no tienes reservas.</string>
+
 </resources>
 
 
