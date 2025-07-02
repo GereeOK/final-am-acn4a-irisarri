@@ -7,33 +7,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:padding="@dimen/padding_medium"
     tools:context=".MainMenuActivity">
 
-    <!-- 1️⃣ Logo grande centrado en la parte superior -->
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/img_turista"
-        android:contentDescription="@string/app_name"
-        android:layout_marginTop="@dimen/padding_large"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- 2️⃣ Botones centrados bajo el logo -->
+    <!-- Contenedor central: saludo + botones -->
     <LinearLayout
-        android:id="@+id/llMenuOptions"
+        android:id="@+id/llCenter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/padding_large"
-        app:layout_constraintTop_toBottomOf="@id/imgLogo"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.45">
 
+        <!-- 1️⃣ Saludo -->
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¡Bienvenido a Baires Essence!"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_marginBottom="@dimen/padding_large"/>
+
+        <!-- 2️⃣ Botones -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnServicios"
             style="@style/Widget.MaterialComponents.Button"
@@ -65,6 +65,7 @@
             android:textAllCaps="false"
             app:backgroundTint="?attr/colorPrimary"
             app:cornerRadius="@dimen/button_corner_radius"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

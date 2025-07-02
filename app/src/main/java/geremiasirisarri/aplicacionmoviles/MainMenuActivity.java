@@ -2,27 +2,19 @@ package geremiasirisarri.aplicacionmoviles;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.button.MaterialButton;
-
-import android.widget.ImageView;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private ImageView imgLogo;
-    private MaterialButton btnServicios;
-    private MaterialButton btnReservations;
-    private MaterialButton btnContact;
+    private MaterialButton btnServicios, btnReservations, btnContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        // Sólo existe imgLogo, ya no hay banner separado
-        imgLogo         = findViewById(R.id.imgLogo);
+        // Sólo inicializamos los botones que ya existen en el layout:
         btnServicios    = findViewById(R.id.btnServicios);
         btnReservations = findViewById(R.id.btnReservations);
         btnContact      = findViewById(R.id.btnContact);
@@ -30,11 +22,9 @@ public class MainMenuActivity extends AppCompatActivity {
         btnServicios.setOnClickListener(v ->
                 startActivity(new Intent(this, ServicesActivity.class))
         );
-
         btnReservations.setOnClickListener(v ->
                 startActivity(new Intent(this, ReservationActivity.class))
         );
-
         btnContact.setOnClickListener(v ->
                 startActivity(new Intent(this, ContactActivity.class))
         );
