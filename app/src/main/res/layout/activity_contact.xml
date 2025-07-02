@@ -17,7 +17,7 @@
         android:background="?attr/colorPrimary"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:title="@string/title_contact"
-        app:titleTextColor="@color/colorTextOnPrimary"
+        app:titleTextColor="@color/colorTextPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -87,8 +87,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/btn_send"
                 android:layout_marginTop="@dimen/padding_medium"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@color/colorTextOnPrimary"/>
+                android:backgroundTint="@color/purple_500"
+                android:textColor="@color/colorTextPrimary"/>
 
         </LinearLayout>
     </ScrollView>

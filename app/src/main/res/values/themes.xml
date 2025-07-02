@@ -1,9 +1,25 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Geremiasirisarriaplicacionesmoviles" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.GeremiasirisarriAplicacionesMoviles"
+        parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- 1) Fondo de la app lo dará directamente el layout -->
+        <!-- <item name="colorBackground">@color/colorBackground</item> -->
+
+        <!-- Palette principal -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorOnPrimary">@color/colorTextPrimary</item>
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/colorTextPrimary</item>
+
+        <!-- StatusBar & NavBar -->
+        <item name="android:statusBarColor">@color/purple_700</item>
+        <item name="android:navigationBarColor">@color/purple_700</item>
+
+        <!-- Que los MaterialButton usen colorPrimary -->
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+
     </style>
 
-    <style name="Theme.Geremiasirisarriaplicacionesmoviles" parent="Base.Theme.Geremiasirisarriaplicacionesmoviles" />
 </resources>

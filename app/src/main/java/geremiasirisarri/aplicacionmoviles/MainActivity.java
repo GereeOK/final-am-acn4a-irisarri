@@ -1,9 +1,8 @@
 package geremiasirisarri.aplicacionmoviles;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -13,13 +12,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Habilita edge-to-edge antes de inflar el layout:
-        EdgeToEdge.enable(this);
+        // 1) Hacer que la ventana dibuje bajo statusBar/navBar
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
-        // Carga el XML con tu toolbar y scrollView:
+        // 2) Carga el layout que contiene tu Toolbar
         setContentView(R.layout.activity_services);
 
-        // Aplica los insets (status bar / navbar) al Toolbar que ahora tiene id @+id/toolbar
+        // 3) Ajustar padding en el toolbar según los insets del sistema
         ViewCompat.setOnApplyWindowInsetsListener(
                 findViewById(R.id.toolbar),
                 (v, insets) -> {
@@ -35,8 +34,3 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 }
-
-
-
-
-

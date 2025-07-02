@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- Icono de carrito -->
+    <ImageView
+        android:id="@+id/ivCart"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_shopping_cart"
+        android:contentDescription="@string/label_my_reservations"/>
+
+    <!-- Badge circular con contador -->
+    <TextView
+        android:id="@+id/tvCartBadge"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_gravity="top|end"
+        android:background="@drawable/bg_badge_circle"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="10sp"
+        android:visibility="gone"/>
+</FrameLayout>
+
+
+

@@ -2,66 +2,69 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_medium">
+    android:background="@color/colorBackground"
+    android:padding="@dimen/padding_medium"
+    tools:context=".MainMenuActivity">
 
-    <!-- 1️⃣ LOGO: ImageView anclado a la esquina superior izquierda -->
+    <!-- 1️⃣ Logo grande centrado en la parte superior -->
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/img_turista"
         android:contentDescription="@string/app_name"
+        android:layout_marginTop="@dimen/padding_large"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- 2️⃣ TÍTULO: TextView alineado al lado del logo -->
-    <TextView
-        android:id="@+id/tvAppTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@id/imgLogo"
-        app:layout_constraintStart_toEndOf="@id/imgLogo"
-        android:layout_marginStart="@dimen/padding_small"/>
-
-    <!-- 3️⃣ MENÚ: LinearLayout vertical centrado para los botones -->
+    <!-- 2️⃣ Botones centrados bajo el logo -->
     <LinearLayout
         android:id="@+id/llMenuOptions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="@dimen/padding_large"
         app:layout_constraintTop_toBottomOf="@id/imgLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Botón Servicios -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnServicios"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height"
             android:text="@string/btn_services"
+            android:textAllCaps="false"
+            app:backgroundTint="?attr/colorPrimary"
+            app:cornerRadius="@dimen/button_corner_radius"
             android:layout_marginBottom="@dimen/padding_small"/>
 
-        <!-- Botón Mis Reservas -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnReservations"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_height"
             android:text="@string/btn_reservations"
+            android:textAllCaps="false"
+            app:backgroundTint="?attr/colorPrimary"
+            app:cornerRadius="@dimen/button_corner_radius"
             android:layout_marginBottom="@dimen/padding_small"/>
 
-        <!-- Botón Contacto -->
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnContact"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_contact"/>
+            android:layout_height="@dimen/button_height"
+            android:text="@string/btn_contact"
+            android:textAllCaps="false"
+            app:backgroundTint="?attr/colorPrimary"
+            app:cornerRadius="@dimen/button_corner_radius"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

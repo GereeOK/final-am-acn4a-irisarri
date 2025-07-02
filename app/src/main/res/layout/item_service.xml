@@ -1,42 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- res/layout/item_service.xml -->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/padding_medium"
-    android:background="@color/colorBackground"
-    android:layout_marginBottom="@dimen/margin_bottom"
-    android:elevation="4dp">
+    android:layout_margin="@dimen/service_card_margin"
+    app:cardCornerRadius="@dimen/service_card_corner"
+    app:cardElevation="@dimen/service_card_elevation"
+    app:cardUseCompatPadding="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true">
 
-    <ImageView
-        android:id="@+id/ivService"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/title_services"/>
-
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/colorTextPrimary"
-        android:layout_marginTop="@dimen/padding_small"/>
+        android:orientation="vertical"
+        android:padding="@dimen/padding_medium">
 
-    <TextView
-        android:id="@+id/tvDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_small"
-        android:textColor="@color/colorTextPrimary"/>
+        <ImageView
+            android:id="@+id/ivService"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/title_services"/>
 
-    <Button
-        android:id="@+id/btnReserve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_reserve"
-        android:layout_marginTop="@dimen/padding_small"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@color/colorBackground"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_marginTop="@dimen/padding_small"/>
+
+        <TextView
+            android:id="@+id/tvDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_small"
+            android:textColor="@color/colorTextPrimary"/>
+
+        <Button
+            android:id="@+id/btnReserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_reserve"
+            android:layout_marginTop="@dimen/padding_small"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="@color/colorBackground"/>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+
 

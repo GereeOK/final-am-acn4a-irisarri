@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Geremiasirisarriaplicacionesmoviles"
+        android:theme="@style/Theme.GeremiasirisarriAplicacionesMoviles"
         tools:targetApi="31">
 
         <!-- launcher -->
@@ -27,20 +27,17 @@
         <!-- Servicios -->
         <activity
             android:name=".ServicesActivity"
-            android:exported="true"/>
+            android:exported="true" />
 
         <!-- Mis Reservas -->
         <activity
             android:name=".ReservationActivity"
-            android:exported="true"/>
+            android:exported="true" />
 
         <!-- Contacto -->
         <activity
             android:name=".ContactActivity"
-            android:exported="true"/>
+            android:exported="true" />
 
     </application>
 </manifest>
-
-
-

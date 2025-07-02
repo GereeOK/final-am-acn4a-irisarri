@@ -9,18 +9,17 @@
     android:background="@color/colorBackground"
     tools:context=".ServicesActivity">
 
-    <!-- 1) Toolbar con back -->
+    <!-- 1) Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:navigationIcon="@drawable/ic_arrow_back"
         app:title="@string/title_services"
-        app:titleTextColor="@color/colorTextOnPrimary"
+        app:titleTextColor="@color/colorTextPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- 2) Scroll container -->
     <ScrollView
@@ -38,14 +37,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- 2.1) Servicios -->
+            <!-- 2.1) Servicios dinámicos -->
             <LinearLayout
                 android:id="@+id/llServices"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
 
-            <!-- 2.2) Mis Reservas -->
+            <!-- 2.2) Mis Reservas (oculto hasta que haya alguna) -->
             <LinearLayout
                 android:id="@+id/misReservasLayout"
                 android:layout_width="match_parent"
@@ -54,7 +53,7 @@
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/padding_medium"
                 android:background="@drawable/bg_reservations"
-                android:elevation="4dp"
+                android:elevation="@dimen/service_card_elevation"
                 android:padding="@dimen/padding_medium">
 
                 <TextView
@@ -63,15 +62,10 @@
                     android:text="@string/label_my_reservations"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary" />
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-

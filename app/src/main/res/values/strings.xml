@@ -29,6 +29,9 @@
     <!-- Mensaje cuando no hay reservas -->
     <string name="no_reservations">Todavía no tienes reservas.</string>
 
+    <string name="desc_obelisco">Vista aérea del Obelisco de Buenos Aires</string>
+
+
 </resources>
 
 
