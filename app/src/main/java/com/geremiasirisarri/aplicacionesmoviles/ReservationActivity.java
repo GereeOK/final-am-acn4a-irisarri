@@ -1,4 +1,4 @@
-package geremiasirisarri.aplicacionmoviles;
+package com.geremiasirisarri.aplicacionesmoviles;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;

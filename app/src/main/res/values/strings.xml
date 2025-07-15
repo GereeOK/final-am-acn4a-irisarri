@@ -1,24 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- Nombre de la app -->
     <string name="app_name">Baires Essence</string>
+
+    <!-- Menú Principal -->
+    <string name="btn_services">Servicios</string>
+    <string name="btn_reservations">Mis Reservas</string>
+    <string name="btn_contact">Contacto</string>
 
     <!-- Pantalla Servicios -->
     <string name="title_services">Nuestros Servicios</string>
     <string name="btn_reserve">Reservar</string>
-    <string name="label_my_reservations">Mis Reservas</string>
 
-    <!-- ⬇️ Menú Principal -->
-    <string name="btn_services">Servicios</string>
-    <string name="btn_reservations">Mis Reservas</string>
-    <string name="btn_contact">Contacto</string>
+    <!-- Pantalla Mis Reservas -->
+    <string name="label_my_reservations">Mis Reservas</string>
+    <string name="no_reservations">Todavía no tienes reservas.</string>
 
     <!-- Contacto -->
     <string name="title_contact">Contacto</string>
     <string name="label_name">Nombre</string>
     <string name="hint_name">Ingresa tu nombre</string>
     <string name="label_email">Email</string>
-    <string name="hint_email">ejemplo@dominio.com</string>
-    <string name="error_email">Introduce un email válido</string>
     <string name="label_message">Mensaje</string>
     <string name="hint_message">¿En qué podemos ayudarte?</string>
     <string name="error_name">El nombre no puede quedar vacío</string>
@@ -26,15 +29,23 @@
     <string name="btn_send">Enviar</string>
     <string name="toast_sent">¡Gracias %1$s! Tu consulta ha sido enviada.</string>
 
-    <!-- Mensaje cuando no hay reservas -->
-    <string name="no_reservations">Todavía no tienes reservas.</string>
-
+    <!-- Descripción adicional -->
     <string name="desc_obelisco">Vista aérea del Obelisco de Buenos Aires</string>
 
+    <!-- Login -->
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="btn_login">Ingresar</string>
+    <string name="go_register">¿No tienes cuenta? Regístrate</string>
+    <string name="error_email">Introduce un email válido</string>
+    <string name="error_password">Ingresa tu contraseña</string>
+    <string name="error_password_length">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="error_auth">Error de autenticación: %1$s</string>
+    <string name="toast_welcome">Bienvenido, %1$s!</string>
+
+    <!-- Register -->
+    <string name="btn_register">Registrarme</string>
+    <string name="error_register">Error al registrarse: %1$s</string>
+    <string name="toast_registered">Usuario %1$s registrado</string>
 
 </resources>
-
-
-
-
-

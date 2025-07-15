@@ -1,4 +1,4 @@
-package geremiasirisarri.aplicacionmoviles;  // tu paquete
+package com.geremiasirisarri.aplicacionesmoviles;  // tu paquete
 
 public class Service {
     private final String name;

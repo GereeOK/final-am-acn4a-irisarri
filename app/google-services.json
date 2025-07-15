@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "385071529004",
+    "project_id": "irisarri-aplicacionesmoviles",
+    "storage_bucket": "irisarri-aplicacionesmoviles.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385071529004:android:71065fa666332fc6196589",
+        "android_client_info": {
+          "package_name": "com.geremiasirisarri.aplicacionesmoviles"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoenoAsaJVaQKRT_Gx2Qm-VokwY4I3b-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385071529004:android:4606630c322845af196589",
+        "android_client_info": {
+          "package_name": "irisarri.aplicaciones.moviles"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoenoAsaJVaQKRT_Gx2Qm-VokwY4I3b-c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
