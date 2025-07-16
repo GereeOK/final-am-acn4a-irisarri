@@ -22,11 +22,12 @@ public class ReservationActivity extends AppCompatActivity {
 
     private SharedPreferences prefs;
     private LinearLayout llReservations;
-    // misma lista de servicios que en ServicesActivity para resolver imágenes/descripciones
+
+    // Ahora el fallback local usa imageName (no imageResId)
     private final List<Service> servicios = Arrays.asList(
-            new Service("City Tour",      "Recorrido por lo mejor de Buenos Aires",      R.drawable.img_citytour),
-            new Service("Show de Tango",  "Cena y espectáculo en una clásica tanguería", R.drawable.img_tango_show),
-            new Service("Delta del Tigre","Navegación por el río y paseo en lancha",     R.drawable.img_tigre)
+            new Service("City Tour",       "Recorrido por lo mejor de Buenos Aires",      "img_citytour"),
+            new Service("Show de Tango",   "Cena y espectáculo en una clásica tanguería", "img_tango_show"),
+            new Service("Delta del Tigre", "Navegación por el río y paseo en lancha",     "img_tigre")
     );
 
     @Override
@@ -41,19 +42,28 @@ public class ReservationActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        // prefs y contenedor
+        // Preferences y contenedor
         prefs = getSharedPreferences("baires_prefs", MODE_PRIVATE);
         llReservations = findViewById(R.id.llReservations);
 
-        // inflar cada reserva como tarjeta
+        // Primera carga
+        loadAndShowReservations();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         loadAndShowReservations();
     }
 
     private void loadAndShowReservations() {
-        // obtenemos set de nombres
+        // 0) limpiar todas las vistas previas
+        llReservations.removeAllViews();
+
+        // 1) obtenemos set de nombres
         Set<String> guardadas = prefs.getStringSet("reservas", new HashSet<>());
+
         if (guardadas.isEmpty()) {
-            // mensaje si no hay
             TextView empty = new TextView(this);
             empty.setText(R.string.no_reservations);
             empty.setTextSize(16);
@@ -65,42 +75,51 @@ public class ReservationActivity extends AppCompatActivity {
             lp.setMargins(0, dpToPx(16), 0, 0);
             empty.setLayoutParams(lp);
             llReservations.addView(empty);
+
         } else {
             for (String name : guardadas) {
-                // buscamos el Service correspondiente
                 Service s = servicios.stream()
                         .filter(x -> x.getName().equals(name))
                         .findFirst()
                         .orElse(null);
                 if (s == null) continue;
 
-                // inflamos item_service.xml
                 View card = getLayoutInflater().inflate(
                         R.layout.item_service, llReservations, false);
 
-                ImageView iv      = card.findViewById(R.id.ivService);
-                TextView  tvName  = card.findViewById(R.id.tvName);
-                TextView  tvDesc  = card.findViewById(R.id.tvDesc);
-                Button    btnAct  = card.findViewById(R.id.btnReserve);
+                ImageView iv     = card.findViewById(R.id.ivService);
+                TextView  tvName = card.findViewById(R.id.tvName);
+                TextView  tvDesc = card.findViewById(R.id.tvDesc);
+                Button    btnAct = card.findViewById(R.id.btnReserve);
 
-                iv.setImageResource(s.getImageResId());
+                // if you want to show the image here, resolve drawable by name:
+                int resId = getResources().getIdentifier(
+                        s.getImageName(),
+                        "drawable",
+                        getPackageName()
+                );
+                if (resId != 0) {
+                    iv.setImageResource(resId);
+                } else {
+                    iv.setImageResource(android.R.drawable.ic_menu_report_image);
+                }
+
                 tvName.setText(s.getName());
                 tvDesc.setText(s.getDescription());
 
-                // adaptamos el botón
                 btnAct.setText("Finalizar Reserva");
                 btnAct.setOnClickListener(v -> {
-                    // 1) quitar de prefs
                     Set<String> actuales = prefs.getStringSet("reservas", new HashSet<>());
                     Set<String> nuevas = new HashSet<>(actuales);
                     nuevas.remove(s.getName());
                     prefs.edit().putStringSet("reservas", nuevas).apply();
-                    // 2) remover tarjeta de la UI
+
+                    // remueve la tarjeta
                     llReservations.removeView(card);
-                    // 3) si quedó vacío, mostrar mensaje
+
+                    // si quedó vacío, muestra mensaje
                     if (nuevas.isEmpty()) {
-                        llReservations.removeAllViews();
-                        loadAndShowReservations(); // recursivo para poner el texto “no hay…”
+                        loadAndShowReservations();
                     }
                 });
 
@@ -111,7 +130,6 @@ public class ReservationActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Up → cerrar
         if (item.getItemId() == android.R.id.home) {
             finish();
             return true;

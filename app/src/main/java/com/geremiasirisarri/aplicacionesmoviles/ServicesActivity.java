@@ -3,6 +3,7 @@ package com.geremiasirisarri.aplicacionesmoviles;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,21 +17,33 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.util.Arrays;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class ServicesActivity extends AppCompatActivity {
 
+    private static final String TAG = "ServicesActivity";
+
     private SharedPreferences prefs;
     private LinearLayout llServices;
     private LinearLayout misReservasLayout;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
+
+        // Inicializar Firebase
+        FirebaseApp.initializeApp(this);
+        db = FirebaseFirestore.getInstance();
 
         // Toolbar con flecha “Up”
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -43,38 +56,76 @@ public class ServicesActivity extends AppCompatActivity {
         // SharedPreferences
         prefs = getSharedPreferences("baires_prefs", MODE_PRIVATE);
 
-        // Referencias
+        // Referencias a layouts
         llServices        = findViewById(R.id.llServices);
         misReservasLayout = findViewById(R.id.misReservasLayout);
 
-        // Datos de servicios
-        List<Service> servicios = Arrays.asList(
-                new Service("City Tour",       "Recorrido por lo mejor de Buenos Aires",      R.drawable.img_citytour),
-                new Service("Show de Tango",   "Cena y espectáculo en una clásica tanguería",  R.drawable.img_tango_show),
-                new Service("Delta del Tigre", "Navegación por el río y paseo en lancha",      R.drawable.img_tigre)
-        );
+        // Cargar servicios desde Firestore
+        loadServicesFromFirestore();
 
-        // Inflar tarjetas
+        // Cargar reservas previas
+        loadExistingReservations();
+    }
+
+    private void loadServicesFromFirestore() {
+        // Limpiar vista antes de poblar
+        llServices.removeAllViews();
+
+        db.collection("servicios")
+                .get()
+                .addOnSuccessListener(this::handleServicesSnapshot)
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al cargar servicios", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Firestore error", e);
+                });
+    }
+
+    private void handleServicesSnapshot(QuerySnapshot snapshots) {
+        List<Service> servicios = new ArrayList<>();
+
+        for (QueryDocumentSnapshot doc : snapshots) {
+            Service s = doc.toObject(Service.class);
+            // Asegurar que imageName no sea null
+            if (s.getImageName() == null || s.getImageName().isEmpty()) {
+                Log.w(TAG, "Documento sin imageName: " + doc.getId());
+                continue;
+            }
+            servicios.add(s);
+        }
+
         for (Service s : servicios) {
             View card = getLayoutInflater().inflate(R.layout.item_service, llServices, false);
 
-            ImageView iv       = card.findViewById(R.id.ivService);
-            TextView  tvName   = card.findViewById(R.id.tvName);
-            TextView  tvDesc   = card.findViewById(R.id.tvDesc);
-            Button    btnReserve = card.findViewById(R.id.btnReserve);
+            ImageView iv        = card.findViewById(R.id.ivService);
+            TextView  tvName    = card.findViewById(R.id.tvName);
+            TextView  tvDesc    = card.findViewById(R.id.tvDesc);
+            Button    btnReserve= card.findViewById(R.id.btnReserve);
 
-            iv.setImageResource(s.getImageResId());
+            // Resuelve dinámicamente el drawable a partir de imageName
+            int resId = getResources().getIdentifier(
+                    s.getImageName(),
+                    "drawable",
+                    getPackageName()
+            );
+            if (resId != 0) {
+                iv.setImageResource(resId);
+            } else {
+                Log.e(TAG, "Drawable no encontrado: " + s.getImageName());
+                // Placeholder genérico del sistema Android
+                iv.setImageResource(android.R.drawable.ic_menu_report_image);
+            }
+
             tvName.setText(s.getName());
             tvDesc.setText(s.getDescription());
 
             btnReserve.setOnClickListener(v -> {
-                // 1) Guardar en SharedPreferences
+                // Guardar en SharedPreferences
                 Set<String> actuales = prefs.getStringSet("reservas", new HashSet<>());
                 Set<String> nuevas   = new HashSet<>(actuales);
                 nuevas.add(s.getName());
                 prefs.edit().putStringSet("reservas", nuevas).apply();
 
-                // 2) Feedback al usuario
+                // Feedback al usuario
                 Toast.makeText(this, "Reservaste: " + s.getName(), Toast.LENGTH_SHORT).show();
                 if (misReservasLayout.getVisibility() == View.GONE) {
                     misReservasLayout.setVisibility(View.VISIBLE);
@@ -82,17 +133,13 @@ public class ServicesActivity extends AppCompatActivity {
                 addReservationTextView(s.getName());
                 invalidateOptionsMenu();
 
-                // 3) Lanzar ReservationActivity con EXTRA
+                // Lanzar ReservationActivity
                 Intent intent = new Intent(this, ReservationActivity.class);
-                intent.putExtra("extra_service_name", s.getName());
                 startActivity(intent);
             });
 
             llServices.addView(card);
         }
-
-        // Cargar reservas previas
-        loadExistingReservations();
     }
 
     @Override
@@ -103,7 +150,6 @@ public class ServicesActivity extends AppCompatActivity {
         TextView badge    = actionView.findViewById(R.id.tvCartBadge);
 
         updateCartBadge(badge);
-
         actionView.setOnClickListener(v -> onOptionsItemSelected(cartItem));
         return true;
     }

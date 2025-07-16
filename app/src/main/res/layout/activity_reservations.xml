@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context="geremiasirisarri.aplicacionesmoviles.aplicacionmoviles.ReservationActivity">
+    tools:context="com.geremiasirisarri.aplicacionesmoviles.ReservationActivity">
 
     <!-- 1) Toolbar con flecha Up -->
     <androidx.appcompat.widget.Toolbar
